@@ -1,0 +1,35 @@
+# Build, release packages, downloaded developer tools and test output
+/dist/
+/artifacts/
+/releases/
+/.tools/
+/tests/work/
+**/bin/
+**/obj/
+
+# IDE and OS files
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.pdb
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Personal launch lists and local shortcuts must never be published
+**/items.xml
+**/items.xml.*
+**/data/
+*.lnk
+
+# Local credentials and signing materials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.log
