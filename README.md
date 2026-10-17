@@ -6,7 +6,7 @@ Windows 桌面小工具，把常用软件、文件、文件夹和网站集中起
 
 ## 下载与安装
 
-在本仓库的 **Releases** 页面下载：
+在 [Releases 下载页面](https://github.com/WalterLyle/quick-launcher/releases/latest) 下载：
 
 - **安装版** `QuickLauncher-1.0.0-windows-setup.exe`：安装到当前用户目录，无需管理员权限，提供开始菜单、可选桌面快捷方式和卸载入口。
 - **便携版** `QuickLauncher-1.0.0-windows-portable.zip`：解压到可写目录，直接运行 `QuickLauncher.exe`，保留旁边的 `portable.flag`。
