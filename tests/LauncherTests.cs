@@ -330,6 +330,7 @@ namespace QuickLauncher
         }
         static void CheckLanguageSwitch(string session, string work)
         {
+            string versionSuffix = " v" + typeof(MainForm).Assembly.GetName().Version.ToString(3);
             string config = Path.Combine(session, "language.xml");
             var targets = new System.Collections.Generic.List<string>();
             for (int i = 0; i < 30; i++) targets.Add("https://example.com/language/" + i);
@@ -346,12 +347,12 @@ namespace QuickLauncher
                     bool startupWasChecked = startup.Checked;
                     var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
                     var tray = (NotifyIcon)typeof(MainForm).GetField("trayIcon", flags).GetValue(form);
-                    Check(button.Text == "Switch to English" && form.Text == "快捷启动器", "默认语言或语言按钮错误");
+                    Check(button.Text == "Switch to English" && form.Text == "快捷启动器" + versionSuffix, "默认语言、标题版本号或语言按钮错误");
                     list.Items[20].Selected = true;
                     list.Items[20].EnsureVisible(); Application.DoEvents();
                     int offset = list.PixelOffset;
                     button.PerformClick(); Application.DoEvents();
-                    Check(UiText.English && form.Text == "Quick Launcher" && button.Text == "切换到中文", "切换英文未即时更新标题或按钮");
+                    Check(UiText.English && form.Text == "Quick Launcher" + versionSuffix && button.Text == "切换到中文", "切换英文未即时更新标题版本号或按钮");
                     Check(list.Columns[0].Text == "Name" && list.Items[20].SubItems[1].Text == "Website"
                         && list.ContextMenuStrip.Items[0].Text == "Open selected items only", "英文列表标题、类型或菜单未翻译");
                     Check(tray.Text == "Quick Launcher" && tray.ContextMenuStrip.Items[0].Text == "Open editor"
@@ -419,12 +420,12 @@ namespace QuickLauncher
                         bitmap.Save(Path.Combine(work, "english-small-preview.png"));
                     }
                     using (var reopened = new MainForm(config, false, false))
-                        Check(UiText.English && reopened.Text == "Quick Launcher", "重新启动未恢复英文偏好");
+                        Check(UiText.English && reopened.Text == "Quick Launcher" + versionSuffix, "重新启动未恢复英文偏好或版本号");
                     automatic.Checked = true;
                     Check(Launcher.LoadLanguage(config) == "en", "修改其他设置丢失语言偏好");
                     automatic.Checked = false;
                     button.PerformClick();
-                    Check(!UiText.English && form.Text == "快捷启动器" && button.Text == "Switch to English"
+                    Check(!UiText.English && form.Text == "快捷启动器" + versionSuffix && button.Text == "Switch to English"
                         && tray.ContextMenuStrip.Items[2].Text == "退出" && list.Items[0].SubItems[1].Text == "网站", "切回中文未完整恢复");
                     Check(Launcher.LoadLanguage(config) == "zh-CN" && Launcher.Load(config).SequenceEqual(targets), "切回中文未保存或改动列表");
                     using (var entered = new System.Threading.ManualResetEventSlim(false))

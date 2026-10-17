@@ -125,6 +125,7 @@ namespace QuickLauncher
         {
             SuspendLayout();
             UiText.Apply(this);
+            Text = UiText.T("快捷启动器") + " v" + typeof(MainForm).Assembly.GetName().Version.ToString(3);
             languageButton.Text = UiText.English ? "切换到中文" : "Switch to English";
             UiText.ApplyMenu(listMenu);
             if (trayMenu != null) UiText.ApplyMenu(trayMenu);

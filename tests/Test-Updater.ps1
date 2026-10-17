@@ -70,7 +70,7 @@ function Invoke-Upgrade([bool]$Portable) {
         if ($restarted -and $restarted.MainWindowHandle -ne 0) { break }
         Start-Sleep -Milliseconds 200
     }
-    if (-not $restarted -or $restarted.MainWindowTitle -ne 'Quick Launcher') { throw 'New version did not restart with saved language' }
+    if (-not $restarted -or $restarted.MainWindowTitle -ne "Quick Launcher v$version") { throw 'New version did not restart with saved language and version' }
     if (-not $restarted.CloseMainWindow() -or -not $restarted.WaitForExit(10000)) { throw 'Restarted app did not close normally (possible startup error dialog)' }
     if (-not $Portable) {
         $uninstall = Start-Process (Join-Path $target 'unins000.exe') -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART' -WindowStyle Hidden -Wait -PassThru
