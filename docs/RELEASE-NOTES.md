@@ -1,20 +1,13 @@
 # QuickLauncher 1.0.0
 
-轻量 Windows 快捷启动器，集中打开常用软件、文件、文件夹和网站。
-
-- 拖放添加文件、文件夹、快捷方式；网站可直接输入地址。
-- 全部打开，或全部打开并退出；失败时继续处理其余项目并保留界面。
-- 可检测到的已运行软件会跳过；网站、文件夹和文件仍正常打开。
-- Windows Shell 保留快捷方式目标、参数和工作目录。
-- 小松鼠图标；移除和清空按钮位于工具栏右侧。
+把常用软件、文件、文件夹和网站放在一起，一键打开。支持拖放添加和直接输入网址，列表自动保存。
 
 ## 下载
 
-- `windows-setup.exe`：当前用户安装，提供开始菜单、可选桌面快捷方式及卸载入口。列表位于 `%LOCALAPPDATA%\QuickLauncher\items.xml`。
-- `windows-portable.zip`：解压后运行，列表位于解压目录的 `data\items.xml`，可随目录一起移动。
-- `SHA256SUMS.txt`：安装包与便携包的 SHA-256 校验值。
+- **安装版**：下载以 `windows-setup.exe` 结尾的文件，按提示安装。
+- **便携版**：下载以 `windows-portable.zip` 结尾的文件，解压即用。
+- `SHA256SUMS.txt` 用于校验下载文件。
 
-安装包与便携包均不包含任何个人启动列表。卸载安装版时保留列表。
+支持 Windows 10/11，需要 .NET Framework 4.x。当前安装包未签名。
 
-支持 Windows 10/11，需要系统具备 .NET Framework 4.x；无第三方运行时依赖。
-当前版本没有代码签名证书。macOS/Linux 需要移植，目前没有可用发行包。
+使用说明见 [README](https://github.com/WalterLyle/quick-launcher#readme) · [English](https://github.com/WalterLyle/quick-launcher/blob/main/README.en.md)。
