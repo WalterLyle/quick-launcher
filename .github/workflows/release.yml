@@ -49,7 +49,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: windows-release
-          path: dist/release/*
+          path: |
+            dist/release/*-windows-setup.exe
+            dist/release/*-windows-portable.zip
           if-no-files-found: error
           retention-days: 14
 
@@ -70,4 +72,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          gh release create "$GITHUB_REF_NAME" release/* --verify-tag --title "QuickLauncher $GITHUB_REF_NAME" --notes-file docs/RELEASE-NOTES.md
+          gh release create "$GITHUB_REF_NAME" release/*-windows-setup.exe release/*-windows-portable.zip --verify-tag --title "QuickLauncher $GITHUB_REF_NAME" --notes-file docs/RELEASE-NOTES.md

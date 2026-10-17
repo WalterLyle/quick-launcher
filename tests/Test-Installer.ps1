@@ -21,6 +21,7 @@ $installArguments = @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/TASKS=
 $installProcess = Start-Process -FilePath $installer -ArgumentList $installArguments -Wait -PassThru -WindowStyle Hidden
 if ($installProcess.ExitCode -ne 0) { throw 'Silent installation failed.' }
 if (-not (Test-Path -LiteralPath (Join-Path $installDir 'QuickLauncher.exe'))) { throw 'Installed executable missing.' }
+if (-not (Test-Path -LiteralPath (Join-Path $installDir 'QuickLauncher.exe.config'))) { throw 'High DPI runtime configuration missing.' }
 if (Test-Path -LiteralPath (Join-Path $installDir 'portable.flag')) { throw 'Installed edition is incorrectly portable.' }
 if ((Get-FileHash -LiteralPath $userConfig -Algorithm SHA256).Hash -ne $originalHash) { throw 'Installation changed the user list.' }
 

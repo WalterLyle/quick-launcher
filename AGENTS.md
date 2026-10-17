@@ -15,4 +15,4 @@
 便携版（portable.flag 或 --portable）将列表保存在程序目录的 data\items.xml；安装和卸载不得删除个人列表。
 禁止把用户个人启动列表提交到仓库。
 
-发布：当前仅发布 Windows 版；Mac/Linux 留待后续移植。package-windows.ps1 生成便携 ZIP、Inno Setup 安装包和 SHA256SUMS.txt，流程见 docs/RELEASING.md。打包仅使用显式文件白名单。
+发布：当前仅发布 Windows 版；Mac/Linux 留待后续移植。package-windows.ps1 生成便携 ZIP 和 Inno Setup 安装包，流程见 docs/RELEASING.md。打包仅使用显式文件白名单，不发布单独校验文件。

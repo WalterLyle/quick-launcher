@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
-$source = [System.Drawing.Image]::FromFile((Join-Path $PSScriptRoot 'assets\squirrel-flat-1.png'))
+$source = [System.Drawing.Image]::FromFile((Join-Path $PSScriptRoot 'assets\squirrel-dynamic.png'))
 $sizes = @(16, 20, 24, 32, 40, 48, 64, 128, 256)
 $frames = @()
 try {
@@ -21,7 +21,7 @@ try {
             $bitmap.Dispose()
         }
     }
-    $iconPath = Join-Path $PSScriptRoot 'assets\QuickLauncher-flat-1.ico'
+    $iconPath = Join-Path $PSScriptRoot 'assets\QuickLauncher-dynamic.ico'
     $output = [System.IO.File]::Create($iconPath)
     $writer = New-Object System.IO.BinaryWriter($output)
     try {

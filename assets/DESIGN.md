@@ -2,14 +2,23 @@
 
 使用内置 image_gen 工具生成透明 PNG，随后通过 Windows 自带 System.Drawing 缩放并封装为 ICO，无新增第三方依赖。
 
-- 当前原图：`squirrel-flat-1.png`（2D 简化版）
-- 当前 Windows 图标：`QuickLauncher-flat-1.ico`
+- 当前原图：`squirrel-dynamic.png`（双炭灰色、向前跃起的松鼠）
+- 当前 Windows 图标：`QuickLauncher-dynamic.ico`
+- 本轮配色为 #3C3F41 与 #2B2B2B，以姿态表现动感；图标本身是静态图标。
 - 初版原图 `squirrel.png` 和图标 `QuickLauncher.ico` 保留供参考。
 - ICO 尺寸：16、20、24、32、40、48、64、128、256 像素，32 位透明通道。
 - 重建 ICO：在项目根目录执行 `powershell -NoProfile -ExecutionPolicy Bypass -File .\build-icon.ps1`。
 - 程序编译时将 ICO 同时嵌入 EXE 图标和窗口使用的程序集资源，不依赖旁边的图片文件。
 
-## 当前 2D 版提示词
+## 当前动感版提示词
+
+使用内置 image_gen 工具，以第一张 2D 松鼠为编辑对象，改变配色和姿态。
+
+```text
+Use case: style-transfer. Edit target: the provided QuickLauncher squirrel icon. Redesign this mascot as a bold contemporary TWO-COLOR flat logo with a much more dynamic pose: a small squirrel leaping diagonally forward to the right at full speed, body leaning forward, one paw reaching ahead, hind feet swept back, huge flowing tail sweeping behind to the left into a single powerful curved swoosh. Compact sporty delivery-mascot energy, cheerful and agile, own original squirrel design. Simplify the acorn into a small lightning-shaped cutout near the chest; prioritise the active silhouette over props. STRICT palette: only solid charcoal gray #3C3F41 and deeper charcoal #2B2B2B; outside and intentional negative-space cutouts must be truly transparent. No orange, no yellow, no cream, no white fill, no extra colors. Use transparent negative spaces to separate limbs, tail and eye so the shape reads at 32px even with the restrained charcoal palette. Very few broad smooth geometric shapes, crisp vector-like edges, bold clear silhouette, simplified face, no fur strokes, no gradients, no shadows, no texture, no 3D, no background tile, no typography or text, no motion blur. Square transparent icon with comfortable margin around complete mascot; one finished symbol only.
+```
+
+## 之前的 2D 版提示词
 
 使用内置 image_gen 编辑初版图标。用户选择第一张 2D 图（眼睛带白点），当前使用第一轮编辑结果。第二轮结果 squirrel-flat.png 和 QuickLauncher-flat.ico 保留供参考。完整提示词如下。
 
