@@ -4,14 +4,14 @@
 
 A lightweight Windows desktop utility that opens your applications, files, folders, and websites together.
 
-Version **0.9.0** supports Windows 10/11 with .NET Framework 4.7 or later. macOS and Linux ports are not available yet. The interface supports Simplified Chinese and English.
+Version **1.0.0** supports Windows 10/11 with .NET Framework 4.7 or later. macOS and Linux ports are not available yet. The interface supports Simplified Chinese and English.
 
 ## Download and installation
 
 Download from the [Releases page](https://github.com/WalterLyle/quick-launcher/releases/latest):
 
-- **Installer:** `QuickLauncher-0.9.0-windows-setup.exe`. Installs for the current user without administrator access and provides a Start menu entry, an optional desktop shortcut, and an uninstaller.
-- **Portable:** `QuickLauncher-0.9.0-windows-portable.zip`. Extract to a writable folder and run `QuickLauncher.exe`. Keep `portable.flag` beside the executable.
+- **Installer:** `QuickLauncher-1.0.0-windows-setup.exe`. Installs for the current user without administrator access and provides a Start menu entry, an optional desktop shortcut, and an uninstaller.
+- **Portable:** `QuickLauncher-1.0.0-windows-portable.zip`. Extract to a writable folder and run `QuickLauncher.exe`. Keep `portable.flag` beside the executable.
 
 The installed edition stores your list in `%LOCALAPPDATA%\QuickLauncher\items.xml`. The portable edition stores it in `data\items.xml` inside its own folder, so you can move your list by copying the entire folder. Neither download includes a personal launch list. Uninstalling the installed edition preserves your list.
 
