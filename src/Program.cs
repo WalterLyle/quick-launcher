@@ -272,6 +272,7 @@ namespace QuickLauncher
         bool startupHandled;
         ReleaseUpdate availableUpdate;
         bool checkingForUpdates;
+        bool installingUpdate;
         bool busy;
         bool dirty;
 
@@ -594,7 +595,7 @@ namespace QuickLauncher
 
         internal async Task CheckForUpdates(Func<Task<ReleaseUpdate>> fetch = null)
         {
-            if (checkingForUpdates || IsDisposed || Disposing) return;
+            if (checkingForUpdates || installingUpdate || IsDisposed || Disposing) return;
             checkingForUpdates = true;
             try
             {
@@ -610,11 +611,47 @@ namespace QuickLauncher
             }
             finally { checkingForUpdates = false; }
         }
-        void OpenUpdate()
+        async void OpenUpdate()
         {
-            if (availableUpdate == null) return;
-            try { Launcher.Open(availableUpdate.DownloadUrl); }
-            catch (Exception ex) { AppMessageBox.Show(this, UiText.T("无法打开更新页面：") + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+            await InstallUpdate();
+        }
+
+        internal async Task<bool> InstallUpdate(Func<ReleaseUpdate, string, bool, IProgress<int>, Task<string>> prepare = null,
+            Action<string> handoff = null, bool showErrors = true)
+        {
+            if (availableUpdate == null || busy || installingUpdate) return false;
+            if (dirty && !Persist()) return false;
+            installingUpdate = true; busy = true;
+            Body.Enabled = false;
+            updateButton.Text = UiText.T("正在下载…");
+            try
+            {
+                bool portable = string.Equals(Path.GetFullPath(config), Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "items.xml")), StringComparison.OrdinalIgnoreCase);
+                var progress = new Progress<int>(percent => {
+                    if (!IsDisposed && !Disposing && installingUpdate) updateButton.Text = UiText.F("下载 {0}%", percent);
+                });
+                string plan = await (prepare ?? AutoUpdater.Prepare)(availableUpdate, AppDomain.CurrentDomain.BaseDirectory, portable, progress);
+                updateButton.Text = UiText.T("正在安装…");
+                (handoff ?? AutoUpdater.StartHelper)(plan);
+                busy = false;
+                Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                if (showErrors) AppMessageBox.Show(this, UiText.T("更新失败，原列表和设置已保留：") + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            finally
+            {
+                installingUpdate = false; busy = false;
+                if (!IsDisposed && !Disposing)
+                {
+                    Body.Enabled = true;
+                    updateButton.Text = UiText.F("更新 v{0}", availableUpdate.Version.ToString(3));
+                    RefreshList();
+                }
+            }
         }
 
         Button MakeButton(string text, EventHandler action, bool primary, int width)
@@ -808,7 +845,14 @@ namespace QuickLauncher
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            if (args.Length == 2 && args[0] == "--apply-update") return AutoUpdater.RunHelper(args[1]);
             if (args.Length > 0 && args[0] == "--self-test") return LauncherTests.Run();
+            using (var updating = new SingleInstance(AutoUpdater.MutexName))
+                if (!updating.IsOwner)
+                {
+                    MessageBox.Show("正在更新，请稍候。 / Update in progress. Please wait.", "QuickLauncher");
+                    return 0;
+                }
             using (var instance = new SingleInstance(SingleInstance.Name))
             {
                 if (!instance.IsOwner)
@@ -819,7 +863,7 @@ namespace QuickLauncher
                 string config = Launcher.ConfigPath(AppDomain.CurrentDomain.BaseDirectory,
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     args.Any(arg => string.Equals(arg, "--portable", StringComparison.OrdinalIgnoreCase)));
-                Application.Run(new MainForm(config));
+                Application.Run(new MainForm(config, true, !args.Contains("--updated")));
             }
             return 0;
         }

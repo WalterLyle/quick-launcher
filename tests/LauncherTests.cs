@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -533,6 +533,7 @@ namespace QuickLauncher
                 CheckMaximizedCaptionDrag();
                 CheckLauncherScrollLayout(session, work);
                 CheckLanguageSwitch(session, work);
+                UpdaterTests.Run(session);
                 string startupTestKey = @"Software\QuickLauncher.Tests\" + Guid.NewGuid().ToString("N");
                 try
                 {
@@ -956,7 +957,7 @@ namespace QuickLauncher
                     Wait(selfForm.RunStartup(delegate { selfLaunches++; }, false));
                     Check(selfLaunches == 0 && selfForm.Visible, "恢复界面重复执行了自身启动项目");
                 }
-                File.WriteAllText(report, "PASS: 自动启动跳过自身及自身快捷方式、恢复界面不重复启动、自动打开设置保存、启动只执行一次、成功收起托盘、失败及空列表保留界面、托盘恢复和退出、系统最小化及还原、更新版本比较、正式版及下载包筛选、更新按钮显隐、断网不打断使用、检查期间关闭窗口、网址校验与 HTTPS 补全、URL 参数保留、网站直接 Shell 打开配置、混合列表保存恢复与去重、网站失败后继续及保留界面、混合列表全部打开并退出、已运行软件及快捷方式跳过、同名不同路径区分、普通文件继续打开、跳过后退出、单实例、阻止重复实例、退出后重新启动、配置恢复、原子保存与备份、中文和特殊字符路径、去重、无效路径过滤、全部打开、失败后继续、失败保留界面、全部打开并退出、真实 .lnk 启动。\r\n");
+                File.WriteAllText(report, "PASS: 一键更新校验、损坏拒绝、越界包拒绝、便携文件替换与回滚、个人数据保留、更新按钮交接与失败恢复、自动启动跳过自身及自身快捷方式、恢复界面不重复启动、自动打开设置保存、启动只执行一次、成功收起托盘、失败及空列表保留界面、托盘恢复和退出、系统最小化及还原、更新版本比较、正式版及下载包筛选、更新按钮显隐、断网不打断使用、检查期间关闭窗口、网址校验与 HTTPS 补全、URL 参数保留、网站直接 Shell 打开配置、混合列表保存恢复与去重、网站失败后继续及保留界面、混合列表全部打开并退出、已运行软件及快捷方式跳过、同名不同路径区分、普通文件继续打开、跳过后退出、单实例、阻止重复实例、退出后重新启动、配置恢复、原子保存与备份、中文和特殊字符路径、去重、无效路径过滤、全部打开、失败后继续、失败保留界面、全部打开并退出、真实 .lnk 启动。\r\n");
                 return 0;
             }
             catch (Exception ex) { File.WriteAllText(report, "FAIL: " + ex); return 1; }

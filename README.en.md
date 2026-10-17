@@ -4,20 +4,20 @@
 
 A lightweight Windows desktop utility that opens your applications, files, folders, and websites together.
 
-Version **1.0.0** supports Windows 10/11 with .NET Framework 4.7 or later. macOS and Linux ports are not available yet. The interface supports Simplified Chinese and English.
+Version **0.9.0** supports Windows 10/11 with .NET Framework 4.7 or later. macOS and Linux ports are not available yet. The interface supports Simplified Chinese and English.
 
 ## Download and installation
 
 Download from the [Releases page](https://github.com/WalterLyle/quick-launcher/releases/latest):
 
-- **Installer:** `QuickLauncher-1.0.0-windows-setup.exe`. Installs for the current user without administrator access and provides a Start menu entry, an optional desktop shortcut, and an uninstaller.
-- **Portable:** `QuickLauncher-1.0.0-windows-portable.zip`. Extract to a writable folder and run `QuickLauncher.exe`. Keep `portable.flag` beside the executable.
+- **Installer:** `QuickLauncher-0.9.0-windows-setup.exe`. Installs for the current user without administrator access and provides a Start menu entry, an optional desktop shortcut, and an uninstaller.
+- **Portable:** `QuickLauncher-0.9.0-windows-portable.zip`. Extract to a writable folder and run `QuickLauncher.exe`. Keep `portable.flag` beside the executable.
 
 The installed edition stores your list in `%LOCALAPPDATA%\QuickLauncher\items.xml`. The portable edition stores it in `data\items.xml` inside its own folder, so you can move your list by copying the entire folder. Neither download includes a personal launch list. Uninstalling the installed edition preserves your list.
 
 Both editions share a single-instance restriction: exit the running launcher before starting another edition. The current release is not code-signed.
 
-An **更新** (Update) button appears in the upper-right corner when a newer stable release is available. Click it to open the download page. The launcher checks once in the background each time it starts; failures do not interrupt normal use.
+An **Update** button appears in the upper-right corner when a newer stable release is available. Click it to download, verify SHA-256, update and restart automatically. Both editions preserve your list and settings. The installer upgrades the existing location; the portable edition replaces only application files and rolls back if replacement fails. After updating, the editor opens without automatically launching your items again. Failed downloads can be retried. The launcher checks once in the background each time it starts; check failures do not interrupt normal use.
 
 ## Usage
 
