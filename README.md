@@ -4,14 +4,14 @@
 
 Windows 桌面小工具，把常用软件、文件、文件夹和网站集中起来，一次打开。
 
-当前版本为 **0.9.0**，支持 Windows 10/11，需要系统具备 .NET Framework 4.7 或更高版本。macOS/Linux 尚未移植，本次不提供这两类发行包。
+当前版本为 **1.0.0**，支持 Windows 10/11，需要系统具备 .NET Framework 4.7 或更高版本。macOS/Linux 尚未移植，本次不提供这两类发行包。
 
 ## 下载与安装
 
 在 [Releases 下载页面](https://github.com/WalterLyle/quick-launcher/releases/latest) 下载：
 
-- **安装版** `QuickLauncher-0.9.0-windows-setup.exe`：安装到当前用户目录，无需管理员权限，提供开始菜单、可选桌面快捷方式和卸载入口。
-- **便携版** `QuickLauncher-0.9.0-windows-portable.zip`：解压到可写目录，直接运行 `QuickLauncher.exe`，保留旁边的 `portable.flag`。
+- **安装版** `QuickLauncher-1.0.0-windows-setup.exe`：安装到当前用户目录，无需管理员权限，提供开始菜单、可选桌面快捷方式和卸载入口。
+- **便携版** `QuickLauncher-1.0.0-windows-portable.zip`：解压到可写目录，直接运行 `QuickLauncher.exe`，保留旁边的 `portable.flag`。
 
 安装版列表保存在 `%LOCALAPPDATA%\QuickLauncher\items.xml`；便携版列表保存在自身目录的 `data\items.xml`，可随整个目录移动。安装包和便携 ZIP 均不包含个人列表。安装版卸载时保留列表。
 

@@ -1,4 +1,4 @@
-# QuickLauncher 0.9.0
+# QuickLauncher 1.0.0
 
 新增版本更新提示：有新版本时显示“更新”按钮，点击进入下载页面。
 
